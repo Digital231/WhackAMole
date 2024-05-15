@@ -9,7 +9,7 @@ for (let i = 0; i < 25; i++) {
 }
 
 function showConfetti(x, y) {
-  const confettiDuration = 1000; 
+  const confettiDuration = 1000;
 
   const end = Date.now() + confettiDuration;
 
@@ -17,8 +17,8 @@ function showConfetti(x, y) {
     confetti({
       origin: { x: x / window.innerWidth, y: y / window.innerHeight },
       particleCount: 200,
-      startVelocity: 30,
-      ticks: 60,
+      startVelocity: 50,
+      ticks: 100,
       spread: 150,
       colors: ["#bb0000", "#ffffff"],
     });
