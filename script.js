@@ -8,6 +8,30 @@ for (let i = 0; i < 25; i++) {
   gridContainer.appendChild(cell);
 }
 
+function showConfetti(x, y) {
+  const confettiDuration = 1000; 
+
+  const end = Date.now() + confettiDuration;
+
+  (function frame() {
+    confetti({
+      origin: { x: x / window.innerWidth, y: y / window.innerHeight },
+      particleCount: 200,
+      startVelocity: 30,
+      ticks: 60,
+      spread: 150,
+      colors: ["#bb0000", "#ffffff"],
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}
+
+const offsetX = 900;
+const offsetY = 0;
+
 function showBlock() {
   const cells = document.querySelectorAll(".cell");
   const randomIndex = Math.floor(Math.random() * cells.length);
@@ -18,6 +42,11 @@ function showBlock() {
     score++;
     points.textContent = `Score: ${score}`;
     block.remove();
+
+    const rect = block.getBoundingClientRect();
+    const confettiX = rect.left + rect.width / 2 + offsetX;
+    const confettiY = rect.top + rect.height / 2 + offsetY;
+    showConfetti(confettiX, confettiY);
   });
 
   cells[randomIndex].appendChild(block);
